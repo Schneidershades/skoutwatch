@@ -52,7 +52,7 @@ class UserRegistrationFormRequest extends FormRequest
      * @OA\Property(
      *      title="User email",
      *      description="Email of the user",
-     *      example="info@tonote.com"
+     *      example="info@skoutwatch.com"
      * )
      *
      * @var string

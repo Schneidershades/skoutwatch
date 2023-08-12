@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\AuthUpdateFormRequest;
 use App\Http\Requests\Auth\UserLoginFormRequest;
 use App\Http\Requests\Auth\UserRegistrationFormRequest;
-use App\Models\DocumentUpload;
 use App\Models\User;
 use App\Services\DocumentConversionService;
 use App\Services\SolanaWalletService;
@@ -112,7 +111,6 @@ class UserController extends Controller
 
         $user->update([
             'last_login_activity' => Carbon::now()->format('Y-m-d H:i:s'),
-            'access_locker_documents' => false,
             'ip_address' => $request->ip(),
         ]);
 
@@ -250,7 +248,7 @@ class UserController extends Controller
      */
     public function profile()
     {
-        return $this->showOne((auth('api')->user()->id), 201);
+        return $this->showOne(auth('api')->user(), 201);
     }
 
     /**
@@ -287,24 +285,7 @@ class UserController extends Controller
      */
     public function dashboard()
     {
-
-        return $user = auth('api')->user();
-
-        $userSignedPrints = $user->tools->whereNotNull('append_print_id')->pluck('document_upload_id')->toArray();
-
-        $documentUploadIds = DocumentUpload::whereIn('id', $userSignedPrints)->select('name')->distinct()->count();
-
-        $data = [
-            'notary_request' => $user->activeTeam->team->envelopsSent->where('status', 'Paid')->count(),
-
-            'complete_sessions' => $user->userScheduledSessions->where('end_session', true)->count(),
-
-            'signed_notes' => $documentUploadIds,
-
-            'received_notes' => $user->documentParticipants->where('who_added_id', '!=', $user->id)->count(),
-
-            'completed_notes' => $user->activeTeam->team->documents->where('status', 'Completed')->count(),
-        ];
+        $data = [];
 
         return $this->showMessage($data);
     }

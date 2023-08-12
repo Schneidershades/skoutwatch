@@ -2,13 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\AttributeCategory;
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Resources\Attribute\AttributeResource;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use App\Http\Resources\Attribute\AttributeCollection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Attribute extends Model
 {
     use HasFactory, HasUuids;
+
+    public $oneItem = AttributeResource::class;
+
+    public $allItems = AttributeCollection::class;
 
     protected $guarded = [];
 

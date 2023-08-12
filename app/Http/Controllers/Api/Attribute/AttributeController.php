@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\Attribute;
 
 use App\Models\Attribute;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class AttributeController extends Controller
@@ -37,12 +36,18 @@ class AttributeController extends Controller
      *          response=403,
      *          description="Forbidden"
      *      ),
+     *      security={ {"bearerAuth": {}} },
      * )
      */
 
     public function index()
     {
         return Attribute::all();
+    }
+
+    public function store()
+    {
+
     }
 
 }

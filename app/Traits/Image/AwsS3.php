@@ -22,7 +22,7 @@ trait AwsS3
     {
         Storage::disk('s3')->put($filename, fopen($file, 'r+'));
 
-        return 'https://tonote-storage.s3.eu-west-3.amazonaws.com'.$filename;
+        return 'https://skoutwatch-storage.s3.eu-west-3.amazonaws.com'.$filename;
     }
 
     protected function uploadImage($image, $path, $connection = 's3')

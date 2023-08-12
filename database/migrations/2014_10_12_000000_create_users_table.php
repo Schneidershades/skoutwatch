@@ -57,6 +57,7 @@ return new class extends Migration
             $table->uuid('city_id')->nullable()->constrained('cities')->cascadeOnUpdate()->nullOnDelete();
             $table->string('solana_public_key')->nullable();
             $table->longText('solana_secret_key')->nullable();
+            $table->timestamp('last_login_activity')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

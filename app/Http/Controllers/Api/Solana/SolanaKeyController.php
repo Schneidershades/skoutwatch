@@ -50,23 +50,5 @@ class SolanaKeyController extends Controller
         $connection = new Connection($client);
         $createWallet = new Keypair();
         $time =  ($createWallet->generate());
-
-        // return new PublicKey((new Account())->getPublicKey());
-
-        // return new PublicKey($time->getPublicKey());
-        // return (new Buffer($time->getSecretKey()))->from($time->secretKey);
-
-        // return $secretKeyString =  Buffer::from($time->getPublicKey())->toString();
-
-        //  return(Buffer::from((new Account())->getPublicKey())->value());
-
-        // return Keypair::fromSecretKey($secretKeyString);
-
-        // return (Buffer::from((new Account())->getSecretKey())->toArray());
-
-        // return;
-
-        // var_dump($time->secretKey);
-
     }
 }

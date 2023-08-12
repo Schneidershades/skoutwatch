@@ -17,7 +17,7 @@ class SessionResendOtpFormRequest extends FormRequest
      * @OA\Property(
      *      title="Email",
      *      description="Email of the user",
-     *      example="info@tonote.com"
+     *      example="info@skoutwatch.com"
      * )
      *
      * @var string

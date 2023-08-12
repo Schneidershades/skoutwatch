@@ -17,7 +17,15 @@ Route::prefix('v1')->group(function () {
 
     Route::resource('/solana-wallet', 'Api\Solana\SolanaKeyController');
 
-    // Route::group(['prefix' => 'user', 'namespace' => 'Api\Solana'], function () {
-    //     Route::get('/wallet', 'SolanaKeyController@index');
-    // });
+    Route::group(['prefix' => 'user', 'middleware' => 'auth:sanctum', 'namespace' => 'Api\Auth'], function () {
+        Route::post('update', 'UserController@updateUser');
+        Route::get('profile', 'UserController@profile');
+        Route::get('dashboard', 'UserController@dashboard');
+        Route::post('change/password', 'ChangePasswordController@store');
+    });
+
+    Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'Api\Attribute'], function () {
+        Route::resource('attributes', 'AttributeController');
+        Route::resource('attribute-category', 'AttributeCategoryController');
+    });
 });

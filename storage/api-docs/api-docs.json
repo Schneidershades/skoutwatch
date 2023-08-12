@@ -1080,7 +1080,7 @@
                         "title": "User reset email",
                         "description": "Reset email of the user",
                         "type": "string",
-                        "example": "info@tonote.com"
+                        "example": "info@skoutwatch.com"
                     }
                 },
                 "type": "object"
@@ -1096,7 +1096,7 @@
                         "title": "User reset email",
                         "description": "Reset email of the user",
                         "type": "string",
-                        "example": "info@tonote.com"
+                        "example": "info@skoutwatch.com"
                     }
                 },
                 "type": "object"
@@ -1112,7 +1112,7 @@
                         "title": "User reset email",
                         "description": "Reset email of the user",
                         "type": "string",
-                        "example": "info@tonote.com"
+                        "example": "info@skoutwatch.com"
                     },
                     "token": {
                         "title": "User token email",
@@ -1146,7 +1146,7 @@
                         "title": "User reset email",
                         "description": "Reset email of the user",
                         "type": "string",
-                        "example": "info@tonote.com"
+                        "example": "info@skoutwatch.com"
                     },
                     "password": {
                         "title": "User OTP Password",
@@ -1175,7 +1175,7 @@
                         "title": "Email",
                         "description": "Email of the user",
                         "type": "string",
-                        "example": "info@tonote.com"
+                        "example": "info@skoutwatch.com"
                     },
                     "session_id": {
                         "title": "Session_id",
@@ -1197,7 +1197,7 @@
                         "title": "User reset email",
                         "description": "Reset email of the user",
                         "type": "string",
-                        "example": "info@tonote.com"
+                        "example": "info@skoutwatch.com"
                     },
                     "document_id": {
                         "title": "document_id",
@@ -1219,7 +1219,7 @@
                         "title": "User reset email",
                         "description": "Reset email of the user",
                         "type": "string",
-                        "example": "info@tonote.com"
+                        "example": "info@skoutwatch.com"
                     },
                     "password": {
                         "title": "User OTP Password",
@@ -1247,7 +1247,7 @@
                         "title": "User email",
                         "description": "Email of the user",
                         "type": "string",
-                        "example": "user@tonote.com"
+                        "example": "user@skoutwatch.com"
                     },
                     "password": {
                         "title": "User password",
@@ -1293,7 +1293,7 @@
                         "title": "User email",
                         "description": "Email of the user",
                         "type": "string",
-                        "example": "info@tonote.com"
+                        "example": "info@skoutwatch.com"
                     },
                     "password": {
                         "title": "User password",
@@ -1315,7 +1315,7 @@
                         "title": "User reset email",
                         "description": "Reset email of the user",
                         "type": "string",
-                        "example": "info@tonote.com"
+                        "example": "info@skoutwatch.com"
                     },
                     "otp": {
                         "title": "User OTP",
@@ -3209,7 +3209,7 @@
                         "title": "User email",
                         "description": "Email of the user",
                         "type": "string",
-                        "example": "info@tonote.com"
+                        "example": "info@skoutwatch.com"
                     },
                     "files": {
                         "title": "Title",

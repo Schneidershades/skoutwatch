@@ -19,7 +19,7 @@ class ResetPasswordRequest extends FormRequest
      * @OA\Property(
      *      title="User reset email",
      *      description="Reset email of the user",
-     *      example="info@tonote.com"
+     *      example="info@skoutwatch.com"
      * )
      *
      * @var string

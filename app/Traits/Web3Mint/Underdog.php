@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits\Payments;
+namespace App\Traits\Web3Mint;
 
 class Underdog
 {
