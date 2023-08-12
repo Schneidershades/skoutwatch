@@ -4,7 +4,6 @@ namespace App\Http\Requests\Document;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-
 class GeneratePdfRequest extends FormRequest
 {
     public function authorize()
@@ -17,7 +16,7 @@ class GeneratePdfRequest extends FormRequest
         return [
             'document.*' => 'nullable|base64file',
             'text' => 'nullable|string',
-            'image' => 'nullable'
+            'image' => 'nullable',
         ];
     }
 }

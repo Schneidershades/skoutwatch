@@ -22,7 +22,7 @@ use Illuminate\Routing\Controller as BaseController;
  * )
  *
  * @OA\Server(
- *     url="http://skoutwatch.test",
+ *     url="http://skoutwatchapi.test",
  *     description="Local API server"
  * )
  * * @OA\Server(

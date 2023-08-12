@@ -9,7 +9,7 @@ use App\Http\Requests\Auth\UserRegistrationFormRequest;
 use App\Models\DocumentUpload;
 use App\Models\User;
 use App\Services\DocumentConversionService;
-use App\Services\UserService;
+use App\Services\SolanaWalletService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -58,6 +58,8 @@ class UserController extends Controller
 
         // event(new UserRegistered($user));
 
+        (new SolanaWalletService($user))->createUserWallet();
+
         return $this->respondWithToken($user->createToken('MyApp')->plainTextToken);
     }
 
@@ -100,7 +102,7 @@ class UserController extends Controller
      */
     public function login(UserLoginFormRequest $request)
     {
-        $user = User::where("email", $request["email"])->firstOrFail();
+        $user = User::where('email', $request['email'])->firstOrFail();
 
         if (! $token = Auth::attempt(['email' => strtolower($request['email']), 'password' => $request['password']])) {
             return $this->authErrorResponse('Incorrect email or password', 401);
@@ -114,7 +116,7 @@ class UserController extends Controller
             'ip_address' => $request->ip(),
         ]);
 
-        return $this->respondWithToken($user->createToken("auth_token")->plainTextToken);
+        return $this->respondWithToken($user->createToken('MyApp')->plainTextToken);
     }
 
     /**
@@ -127,6 +129,7 @@ class UserController extends Controller
      *
      *      @OA\RequestBody(
      *          required=true,
+     *
      *          @OA\JsonContent(ref="#/components/schemas/AuthUpdateFormRequest")
      *      ),
      *

@@ -24,6 +24,7 @@ class UpdateDocumentSingleCompleteFormRequest extends FormRequest
      * @var string
      */
     public $file;
+
     /**
      * @OA\Property(
      *      title="status",
@@ -34,6 +35,7 @@ class UpdateDocumentSingleCompleteFormRequest extends FormRequest
      * @var string
      */
     public $status;
+
     /**
      * @OA\Property(
      *      title="number_ordering",
@@ -44,7 +46,6 @@ class UpdateDocumentSingleCompleteFormRequest extends FormRequest
      * @var int
      */
     public $number_ordering;
-
 
     /**
      * Determine if the user is authorized to make this request.
@@ -66,7 +67,7 @@ class UpdateDocumentSingleCompleteFormRequest extends FormRequest
         return [
             'file' => 'nullable|base64file',
             'status' => 'nullable|In:Processed',
-            'number_ordering' => 'required|int'
+            'number_ordering' => 'required|int',
         ];
     }
 }

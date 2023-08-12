@@ -14,26 +14,26 @@ use Illuminate\Foundation\Http\FormRequest;
  */
 class StoreDocumentShareFormRequest extends FormRequest
 {
-     /**
-      *       @OA\Property(property="documents", type="object", type="array",
-      *
-      *            @OA\Items(
-      *
-      *                @OA\Property(
-      *                   property="document_id",
-      *                   type="string",
-      *                   example="id"
-      *               ),
-      *              @OA\Property(
-      *                   property="email",
-      *                   type="string",
-      *                   example="schneidershades@gmail.com"
-      *               ),
-      *            ),
-      *        ),
-      *    ),
-      */
-     public $documents;
+    /**
+     *       @OA\Property(property="documents", type="object", type="array",
+     *
+     *            @OA\Items(
+     *
+     *                @OA\Property(
+     *                   property="document_id",
+     *                   type="string",
+     *                   example="id"
+     *               ),
+     *              @OA\Property(
+     *                   property="email",
+     *                   type="string",
+     *                   example="schneidershades@gmail.com"
+     *               ),
+     *            ),
+     *        ),
+     *    ),
+     */
+    public $documents;
 
     /**
      * Determine if the user is authorized to make this request.

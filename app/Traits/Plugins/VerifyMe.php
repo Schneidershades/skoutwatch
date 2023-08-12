@@ -4,7 +4,6 @@ namespace App\Traits\Plugins;
 
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Log;
 
 class VerifyMe
 {
@@ -31,7 +30,7 @@ class VerifyMe
             'dob' => config('verifyme.api_mode') == 'dev' ? '04-04-1944' : Carbon::parse($request['dob'])->format('d-m-Y'),
         ];
 
-        $nin = config('verifyme.api_mode') == 'dev' ? 'JZ426633988976CH' : $request['value'] ;
+        $nin = config('verifyme.api_mode') == 'dev' ? 'JZ426633988976CH' : $request['value'];
 
         return $this->sendRequest('https://vapi.verifyme.ng/v1/verifications/identities/virtual-nin/'.$nin, 'POST', json_encode($request_body));
     }
@@ -39,12 +38,12 @@ class VerifyMe
     public function verifyUserNIN($user, $request)
     {
         $request_body = [
-            'firstname' => config('verifyme.api_mode') == 'dev' ? 'John' : $user->first_name ,
-            'lastname' => config('verifyme.api_mode') == 'dev' ? 'Doe' :  $user->last_name,
+            'firstname' => config('verifyme.api_mode') == 'dev' ? 'John' : $user->first_name,
+            'lastname' => config('verifyme.api_mode') == 'dev' ? 'Doe' : $user->last_name,
             'dob' => config('verifyme.api_mode') == 'dev' ? '04-04-1944' : Carbon::parse($request['dob'])->format('d-m-Y'),
         ];
 
-        $nin = config('verifyme.api_mode') == 'dev' ? 10000000001 : $request['value'] ;
+        $nin = config('verifyme.api_mode') == 'dev' ? 10000000001 : $request['value'];
 
         return $this->sendRequest('https://vapi.verifyme.ng/v1/verifications/identities/nin/'.$nin, 'POST', json_encode($request_body));
     }
@@ -64,8 +63,8 @@ class VerifyMe
         $request_body = [
             'firstname' => config('verifyme.api_mode') == 'dev' ? 'John' : $user->first_name,
             'lastname' => config('verifyme.api_mode') == 'dev' ? 'Doe' : $user->last_name,
-            'phone' => config('verifyme.api_mode') == 'dev' ? '080000000000' : $user->phone ,
-            'dob' => config('verifyme.api_mode') == 'dev' ? '04-04-1944' :  Carbon::parse($request['dob'])->format('d-m-Y'),
+            'phone' => config('verifyme.api_mode') == 'dev' ? '080000000000' : $user->phone,
+            'dob' => config('verifyme.api_mode') == 'dev' ? '04-04-1944' : Carbon::parse($request['dob'])->format('d-m-Y'),
         ];
 
         $drivers_license = config('verifyme.api_mode') == 'dev' ? 10000000001 : (int) $request['value'];

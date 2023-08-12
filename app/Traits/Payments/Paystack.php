@@ -7,6 +7,7 @@ use App\Traits\Api\ApiResponder;
 class Paystack
 {
     use ApiResponder;
+
     protected $baseUrl;
 
     protected $env;
@@ -266,7 +267,7 @@ class Paystack
 
         $response = $this->sendRequest('https://api.paystack.co/transaction/charge_authorization', 'POST', json_encode($request_body));
 
-        if($response->status == false){
+        if ($response->status == false) {
             return $this->errorResponse($response->message, 409);
         }
 
@@ -295,7 +296,6 @@ class Paystack
             ];
         }
     }
-
 
     private function sendRequest($url, $requestType, $postfields = [])
     {

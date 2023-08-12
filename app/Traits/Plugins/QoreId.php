@@ -3,8 +3,8 @@
 namespace App\Traits\Plugins;
 
 use Carbon\Carbon;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class QoreId
 {

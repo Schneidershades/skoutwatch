@@ -12,7 +12,6 @@ use Illuminate\Foundation\Http\FormRequest;
  *      required={"name"}
  * )
  */
-
 class UpdateCardFormRequest extends FormRequest
 {
     /**
@@ -25,7 +24,6 @@ class UpdateCardFormRequest extends FormRequest
      * @var string
      */
     public $recurring_transaction_id;
-
 
     /**
      * Determine if the user is authorized to make this request.

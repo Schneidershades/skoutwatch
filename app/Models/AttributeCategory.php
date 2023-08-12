@@ -9,11 +9,14 @@ use Illuminate\Database\Eloquent\Model;
 class AttributeCategory extends Model
 {
     use HasFactory, HasUuids;
+
     protected $guarded = [];
+
     public function attributes()
     {
         return $this->hasMany(Attribute::class);
     }
+
     public function user()
     {
         return $this->belongsTo(User::class);

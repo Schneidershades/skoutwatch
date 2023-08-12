@@ -12,7 +12,6 @@ use Illuminate\Foundation\Http\FormRequest;
  *      required={"name"}
  * )
  */
-
 class StoreCardFormRequest extends FormRequest
 {
     /**

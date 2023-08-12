@@ -57,7 +57,7 @@ class StoreVerifyMeFormRequest extends FormRequest
         return [
             'type' => 'required|In:bvn,nin,drivers_license,vnin',
             'value' => 'required|string',
-            'dob'   => 'required|date',
+            'dob' => 'required|date',
         ];
     }
 }

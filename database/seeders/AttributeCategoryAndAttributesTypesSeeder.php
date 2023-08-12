@@ -3,9 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Attribute;
-use Illuminate\Database\Seeder;
 use App\Models\AttributeCategory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
 class AttributeCategoryAndAttributesTypesSeeder extends Seeder
 {
@@ -16,12 +15,12 @@ class AttributeCategoryAndAttributesTypesSeeder extends Seeder
     {
         $categories = ['Pace', 'Shooting', 'Passing', 'Dribbling', 'Defending', 'Physicality'];
 
-        foreach($categories as $cat){
+        foreach ($categories as $cat) {
             $cat = AttributeCategory::create([
                 'name' => $cat,
             ]);
 
-            $types = match($cat->name){
+            $types = match ($cat->name) {
                 'Pace' => ['Acceleration', 'Sprint Speed'],
                 'Shooting' => ['Vision', 'Crossing', 'Freekick Accuracy', 'Short Passing', 'Long Passing', 'Curving'],
                 'Passing' => ['Positioning', 'Finishing', 'Shot Power', 'Long Shots', 'Volleys', 'Penalties'],
@@ -30,10 +29,10 @@ class AttributeCategoryAndAttributesTypesSeeder extends Seeder
                 'Physicality' => ['Jumping', 'Stamina', 'Strength', 'Aggression'],
             };
 
-            foreach($types as $type){
+            foreach ($types as $type) {
                 Attribute::create([
                     'name' => $type,
-                    'attribute_category_id' => $cat->id
+                    'attribute_category_id' => $cat->id,
                 ]);
             }
         }

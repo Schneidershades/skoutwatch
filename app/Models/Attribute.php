@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Attribute extends Model
 {
     use HasFactory, HasUuids;
+
     protected $guarded = [];
 
     public function attributeCategory()

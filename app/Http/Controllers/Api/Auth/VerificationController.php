@@ -14,10 +14,10 @@ use App\Providers\RouteServiceProvider;
 use App\Services\DocumentConversionService;
 use App\Services\UserService;
 use App\Traits\Plugins\VerifyMe;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use Carbon\Carbon;
 
 class VerificationController extends Controller
 {
@@ -239,7 +239,7 @@ class VerificationController extends Controller
             'drivers_license' => (new VerifyMe())->verifyUserDriverLicense(auth('api')->user(), $request),
         };
 
-        if(isset($n->status) && (($n->status) == "error")){
+        if (isset($n->status) && (($n->status) == 'error')) {
             return $this->errorResponse($n->message, 409);
         }
 

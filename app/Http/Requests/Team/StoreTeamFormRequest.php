@@ -14,36 +14,36 @@ use Illuminate\Foundation\Http\FormRequest;
  */
 class StoreTeamFormRequest extends FormRequest
 {
-     /**
-      *       @OA\Property(property="team", type="object", type="array",
-      *
-      *            @OA\Items(
-      *
-      *                @OA\Property(
-      *                   property="email",
-      *                   type="string",
-      *                   example="ojo@finrs.com"
-      *               ),
-      *               @OA\Property(
-      *                   property="first_name",
-      *                   type="string",
-      *                   example="first_name"
-      *               ),
-      *               @OA\Property(
-      *                   property="last_name",
-      *                   type="string",
-      *                   example="first_name"
-      *               ),
-      *               @OA\Property(
-      *                   property="permission",
-      *                   type="string",
-      *                   example="Admin,Send,View"
-      *               ),
-      *            ),
-      *        ),
-      *    ),
-      */
-     public $team;
+    /**
+     *       @OA\Property(property="team", type="object", type="array",
+     *
+     *            @OA\Items(
+     *
+     *                @OA\Property(
+     *                   property="email",
+     *                   type="string",
+     *                   example="ojo@finrs.com"
+     *               ),
+     *               @OA\Property(
+     *                   property="first_name",
+     *                   type="string",
+     *                   example="first_name"
+     *               ),
+     *               @OA\Property(
+     *                   property="last_name",
+     *                   type="string",
+     *                   example="first_name"
+     *               ),
+     *               @OA\Property(
+     *                   property="permission",
+     *                   type="string",
+     *                   example="Admin,Send,View"
+     *               ),
+     *            ),
+     *        ),
+     *    ),
+     */
+    public $team;
 
     /**
      * @OA\Property(

@@ -20,6 +20,7 @@ class DocumentResendOtpController extends Controller
      *
      *      @OA\RequestBody(
      *          required=true,
+     *
      *          @OA\JsonContent(ref="#/components/schemas/StoreDocumentResendOtpFormRequest")
      *      ),
      *
