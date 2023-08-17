@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attribute_categories', function (Blueprint $table) {
+        Schema::create('player_attributes', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('description')->nullable();
+            $table->uuid('attribute_id')->nullable()->constrained('attributes')->cascadeOnUpdate()->nullOnDelete();
+            $table->uuid('player_id')->nullable()->constrained('users')->cascadeOnUpdate()->nullOnDelete();
+            $table->integer('score')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('attribute_categories');
+        Schema::dropIfExists('player_attributes');
     }
 };

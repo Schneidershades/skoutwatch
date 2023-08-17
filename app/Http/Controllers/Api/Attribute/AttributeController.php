@@ -42,12 +42,7 @@ class AttributeController extends Controller
 
     public function index()
     {
-        return Attribute::all();
-    }
-
-    public function store()
-    {
-
+        return $this->showAll(Attribute::all());
     }
 
 }

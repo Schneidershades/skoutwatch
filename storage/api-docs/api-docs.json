@@ -51,7 +51,12 @@
                     "403": {
                         "description": "Forbidden"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/v1/attributes": {
@@ -78,7 +83,12 @@
                     "403": {
                         "description": "Forbidden"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/v1/user/change/password": {
@@ -766,6 +776,78 @@
                 "responses": {
                     "200": {
                         "description": "Successful signin",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/players": {
+            "get": {
+                "tags": [
+                    "Player"
+                ],
+                "summary": "AllPlayer",
+                "description": "Showing all player list",
+                "operationId": "AllPlayer",
+                "responses": {
+                    "200": {
+                        "description": "Successful signin",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Player"
+                ],
+                "summary": "createPlayer",
+                "description": "create a player and attributes",
+                "operationId": "createPlayer",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StorePlayerAttributeFormRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful signup",
                         "content": {
                             "application/json": {}
                         }
@@ -2392,6 +2474,56 @@
                         "description": "charge",
                         "type": "string",
                         "example": "3"
+                    }
+                },
+                "type": "object"
+            },
+            "StorePlayerAttributeFormRequest": {
+                "title": "Player Create Form Request Fields",
+                "description": "Player Create request body data",
+                "required": [
+                    "first_name"
+                ],
+                "properties": {
+                    "first_name": {
+                        "title": "first_name",
+                        "description": "first_name",
+                        "type": "string",
+                        "example": "Schneider"
+                    },
+                    "last_name": {
+                        "title": "last_name",
+                        "description": "last_name",
+                        "type": "string",
+                        "example": "Komolafe"
+                    },
+                    "nin": {
+                        "title": "nin",
+                        "description": "nin",
+                        "type": "string",
+                        "example": "13904949033"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "email",
+                        "type": "string",
+                        "example": "schneidershades@gmail.com"
+                    },
+                    "attributes": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "attribute": {
+                                    "type": "string",
+                                    "example": "Dribbling"
+                                },
+                                "score": {
+                                    "type": "integer",
+                                    "example": "50"
+                                }
+                            },
+                            "type": "object"
+                        }
                     }
                 },
                 "type": "object"

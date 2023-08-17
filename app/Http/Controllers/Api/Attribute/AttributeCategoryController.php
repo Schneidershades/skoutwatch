@@ -42,6 +42,6 @@ class AttributeCategoryController extends Controller
 
     public function index()
     {
-        return AttributeCategory::all();
+        return $this->showAll(AttributeCategory::all());
     }
 }

@@ -51,11 +51,16 @@ class User extends Authenticatable
 
     public function attributes()
     {
-        return $this->hasMany(Attribute::class);
+        return $this->hasMany(PlayerAttribute::class, 'player_id');
     }
 
     public function attributeCategories()
     {
         return $this->hasMany(AttributeCategory::class);
+    }
+
+    public function playerAttributes()
+    {
+        return $this->belongsToMany(Attribute::class, 'player_attributes');
     }
 }

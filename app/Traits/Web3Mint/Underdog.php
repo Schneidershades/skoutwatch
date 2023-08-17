@@ -4,7 +4,7 @@ namespace App\Traits\Web3Mint;
 
 class Underdog
 {
-    public function __construct(public $url, public $projectId)
+    public function __construct(public $url = null, public $projectId = null)
     {
         $this->url = config('underdog.url');
         $this->projectId = config('underdog.project_id');
@@ -13,18 +13,20 @@ class Underdog
     public function createNfts($user)
     {
         $content = [
-            'name' => "{$user->first_name} {$user->middle_name} {$user->last_name}",
-            'symbol' => $user->id,
-            'description' => $user->description,
-            'image' => $user->image,
+            'name' => $user['first_name'] .' '.$user['last_name'],
+            'symbol' => "SK",
+            'description' => "this process will mint the attributes of ". $user['first_name'] .' '.$user['last_name'],
+            'image' => "https://skoutwatch.com/img/2asset%203%201.png",
             'externalUrl' => 'N/A',
             'receiverAddress' => config('underdog.receiver_address'),
             'upsert' => true,
             'delegated' => true,
-            'attributes' => []
+            'attributes' =>  ((object)$user['attributes'][0])
         ];
 
-        return $this->sendRequest("{$this->url}/v2/projects/{$this->projectId}/nfts", 'POST', json_encode($content));
+        return $response = $this->sendRequest("{$this->url}/v2/projects/c/{$this->projectId}/nfts", 'POST', json_encode($content));
+
+        return $errorArray = json_decode($response->message, true);
     }
 
     public function searchNfts()

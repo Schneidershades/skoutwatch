@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->uuid('attribute_category_id')->nullable()->constrained('attribute_categories')->cascadeOnUpdate()->nullOnDelete();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
