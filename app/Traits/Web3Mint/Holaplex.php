@@ -2,12 +2,13 @@
 
 namespace App\Traits\Web3Mint;
 
-use GraphQL\GraphQL;
+use Api\Traits\Curl\CurlRequest;
 
 class Holaplex
 {
-    public function __construct(private $url, private $projectId, private $key)
+    public function __construct(private $url, private $projectId, private $key, private $receiver_address)
     {
+        $this->receiver_address = config('holaplex.receiver_address');
         $this->url = config('holaplex.url');
         $this->projectId = config('holaplex.project_id');
         $this->key = config('holaplex.key');
@@ -26,11 +27,11 @@ class Holaplex
 
         $inputVariables = [
             "input" => [
-                "project" => "<PROJECT_ID>",
+                "project" => $this->projectId,
                 "blockchain" => "SOLANA",
                 "creators" => [
                     [
-                        "address" => "<CREATOR_WALLET_ADDRESS>",
+                        "address" => $this->receiver_address,
                         "share" => 100,
                         "verified" => false
                     ]
@@ -50,8 +51,8 @@ class Holaplex
             'variables' => $inputVariables,
         ]);
 
-
-        return $this->sendRequest("https://api.holaplex.com/graphql", 'POST', json_encode($body));
+        $response = (new CurlRequest($this->url, $this->key, 'POST', json_encode($body)))->sendRequest();
+        return $response;
 
     }
     public function getCollectionStatus()
@@ -77,8 +78,8 @@ class Holaplex
             'variables' => $inputVariables,
         ]);
 
-        return $this->sendRequest("https://api.holaplex.com/graphql", 'POST', json_encode($body));
-
+        $response = (new CurlRequest($this->url, $this->key, 'POST', json_encode($body)))->sendRequest();
+        return $response;
     }
 
     public function mintCollection()
@@ -103,31 +104,7 @@ class Holaplex
             'variables' => $inputVariables,
         ]);
 
-        return $this->sendRequest("https://api.holaplex.com/graphql", 'POST', json_encode($body));
-
-    }
-
-    private function sendRequest($url, $requestType, $postfields = [])
-    {
-        $curl = curl_init();
-        curl_setopt_array($curl, [
-            CURLOPT_URL => $url,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => $requestType,
-            CURLOPT_POSTFIELDS => $postfields,
-            CURLOPT_HTTPHEADER => [
-                'Content-Type: application/json',
-                'Authorization: Bearer '.config('holaplex.key'),
-            ],
-        ]);
-
-        $response = curl_exec($curl);
-
-        return json_decode($response);
+        $response = (new CurlRequest($this->url, $this->key, 'POST', json_encode($body)))->sendRequest();
+        return $response;
     }
 }
