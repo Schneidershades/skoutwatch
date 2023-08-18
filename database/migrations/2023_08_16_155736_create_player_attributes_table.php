@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('player_attributes', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('attribute_id')->nullable()->constrained('attributes')->cascadeOnUpdate()->nullOnDelete();
-            $table->uuid('player_id')->nullable()->constrained('users')->cascadeOnUpdate()->nullOnDelete();
-            $table->integer('score')->nullable();
+            $table->string('mint_id')->nullable();
+            $table->string('blockchain_source')->nullable();
+            $table->string('assets')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
