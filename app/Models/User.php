@@ -51,7 +51,7 @@ class User extends Authenticatable
 
     public function attributes()
     {
-        return $this->hasMany(PlayerAttribute::class, 'player_id');
+        return $this->hasMany(PlayerAttribute::class, 'user_id');
     }
 
     public function attributeCategories()
@@ -63,4 +63,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Attribute::class, 'player_attributes');
     }
+
+
+    public function playerMints()
+    {
+        return $this->hasMany(PlayerMint::class, 'user_id');
+    }
+
 }

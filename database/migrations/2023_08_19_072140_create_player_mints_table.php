@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('player_attributes', function (Blueprint $table) {
+        Schema::create('player_mints', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('attribute_id')->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
-            $table->string('score')->nullable();
             $table->string('mint_id')->nullable();
+            $table->string('blockchain_source')->nullable();
+            $table->string('assets')->nullable();
             $table->uuid('user_id')->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('player_attributes');
+        Schema::dropIfExists('player_mints');
     }
 };

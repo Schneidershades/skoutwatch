@@ -87,8 +87,6 @@ class PlayerController extends Controller
 
         return (new ProcessNftService())->playerProcess($user, $request);
 
-        $this->showMessage('User has been created');
-
     }
 
     public function show($id)
@@ -97,11 +95,6 @@ class PlayerController extends Controller
     }
 
     public function update($id)
-    {
-
-    }
-
-    public function destroy($id)
     {
 
     }

@@ -4,10 +4,13 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\Attribute;
+use App\Traits\Api\ApiResponder;
 use App\Traits\Web3Mint\Holaplex;
 
 class ProcessNftService
 {
+    use ApiResponder;
+
     public function playerProcess(User $user, $request)
     {
         $fullName = $user->first_name .' '.$user->last_name;
@@ -30,20 +33,37 @@ class ProcessNftService
 
 
         foreach($request['attributes'] as $att){
-
-            $attribute = Attribute::where('name', $att['attribute'])->first();
-
             $player['attributes'][] = [ "traitType" => $att['attribute'], "value" => (string)$att['score'] ];
-
         }
 
-        return $sendInfoToBlockchain = (new Holaplex())->mintCollection($player);
+        $mintAsset = (new Holaplex())->mintCollection($player);
 
+        if($mintAsset['success'] == false){
+            return $this->errorResponse('Unable to process minting service', 400);
+        }
 
-        $user->attributes()->create([
-            'mint_id' => $sendInfoToBlockchain['mint_id'],
-            'blockchain_source' => $sendInfoToBlockchain['blockchain_source'],
+        $user->playerMints()->create([
+            'mint_id' => $mintAsset['mint_id'],
+            'blockchain_source' => 'Holaplex',
         ]);
 
+        $this->processMintTraces($user, $request, $mintAsset['mint_id']);
+
+        return $this->showMessage('Minted Successfully');
+
+    }
+
+
+    public function processMintTraces(User $user, $request, $mint_id)
+    {
+        foreach($request['attributes'] as $att){
+            $attribute = Attribute::where('name', $att['attribute'])->first();
+
+            $user->attributes()->create([
+                'attribute_id' => $attribute->id,
+                'score' => (string)$att['score'],
+                'mint_id' => $mint_id,
+            ]);
+        }
     }
 }
