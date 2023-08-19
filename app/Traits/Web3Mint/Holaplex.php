@@ -54,7 +54,19 @@ class Holaplex
             'variables' => $inputVariables,
         ];
 
-        return $response = (new CurlRequest($this->url, $this->key, 'POST', json_encode($body)))->sendRequest();
+        $response = (new CurlRequest($this->url, $this->key, 'POST', json_encode($body)))->sendRequest();
+
+        if($response->data->mintToCollection->collectionMint->id == null){
+            return [
+                'success' => false,
+                'mint_id' => null
+            ];
+        }else{
+            return [
+                'success' => true,
+                'mint_id' => $response->data->mintToCollection->collectionMint->id
+            ];
+        }
 
     }
 

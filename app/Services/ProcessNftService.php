@@ -39,6 +39,7 @@ class ProcessNftService
 
         return $sendInfoToBlockchain = (new Holaplex())->mintCollection($player);
 
+
         $user->attributes()->create([
             'mint_id' => $sendInfoToBlockchain['mint_id'],
             'blockchain_source' => $sendInfoToBlockchain['blockchain_source'],

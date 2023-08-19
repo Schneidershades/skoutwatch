@@ -4,7 +4,12 @@ namespace App\Traits\Curl;
 
 class CurlRequest
 {
-    public function __construct(public string $apiUrl, public string $bearerToken, public string $requestType, public $fields,){}
+    public function __construct(
+            public string $apiUrl,
+            public string $bearerToken,
+            public string $requestType,
+            public $fields,
+    ){}
 
     public function sendRequest()
     {
@@ -28,6 +33,6 @@ class CurlRequest
 
         $response = curl_exec($curl);
 
-        return ($response);
+        return json_decode($response);
     }
 }
