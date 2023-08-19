@@ -37,7 +37,6 @@ class PlayerController extends Controller
      *          response=403,
      *          description="Forbidden"
      *      ),
-     *      security={ {"bearerAuth": {}} },
      * )
      */
     public function index()
@@ -78,7 +77,6 @@ class PlayerController extends Controller
      *          response=403,
      *          description="Forbidden"
      *      ),
-     *      security={ {"bearerAuth": {}} },
      * )
      */
     public function store(StorePlayerAttributeFormRequest $request)
