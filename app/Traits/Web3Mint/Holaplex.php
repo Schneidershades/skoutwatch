@@ -27,8 +27,15 @@ class Holaplex
 
     public function mintCollection($data)
     {
-        $graphqlQuery = 'mutation MintToCollection($input: MintToCollectionInput!) {\n  mintToCollection(input: $input) {\n    collectionMint {\n      id\n      creationStatus\n      compressed\n    }\n  }\n}';
-
+        $graphqlQuery = 'mutation MintToCollection($input: MintToCollectionInput!) {
+            mintToCollection(input: $input) {
+              collectionMint {
+                id
+                creationStatus
+                compressed
+              }
+            }
+          }';
 
         $inputVariables = [
             "input" => [
@@ -45,22 +52,14 @@ class Holaplex
                 "metadataJson" => $data
             ]
         ];
+
         $body = [
             'query' => $graphqlQuery,
             'variables' => $inputVariables,
         ];
 
-        $options = [
-            'http' => [
-                'header' => "Authorization: ory_at_X8f5V224hbT3cOvPtxUXdmKbR86FmVrcbcaX9abtjhU.z6UYhd9hwBx7xaf6qs7ZJlDXP6qVsHkF9krTQguuPyU\r\n" .
-                            "Content-Type: application/json\r\n",
-                'method' => 'POST',
-                'content' => json_encode($body),
-            ],
-        ];
+        return $response = (new CurlRequest($this->url, $this->key, 'POST', json_encode($body)))->sendRequest();
 
-        $context = stream_context_create($options);
-        return $response = file_get_contents('https://api.holaplex.com/graphql', false, $context);
     }
 
 }

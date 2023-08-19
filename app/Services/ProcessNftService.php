@@ -22,9 +22,9 @@ class ProcessNftService
 
         $player = [
             'name' => $fullName,
-            'symbol' => 'cece',
+            'symbol' => 'nini',
             'description' => "This process will mint the attributes of $fullName",
-            'image' => $storeImageValue ? $storeImageValue : "https://www.canada.ca/etc/designs/canada/wet-boew/assets/sig-blk-en.svg",
+            'image' => $storeImageValue ? stripslashes($storeImageValue) : stripslashes("https://www.canada.ca/etc/designs/canada/wet-boew/assets/sig-blk-en.svg"),
             'attributes' =>  []
         ];
 
