@@ -2,109 +2,65 @@
 
 namespace App\Traits\Web3Mint;
 
-use Api\Traits\Curl\CurlRequest;
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+use App\Traits\Curl\CurlRequest;
+use Softonic\GraphQL\ClientBuilder;
+use Illuminate\Support\Facades\Http;
 
 class Holaplex
 {
-    public function __construct(private $url, private $projectId, private $key, private $receiver_address)
+    protected $url;
+    protected $projectId;
+    protected $key;
+    protected $receiverAddress;
+    protected $collectionId;
+
+    public function __construct()
     {
-        $this->receiver_address = config('holaplex.receiver_address');
         $this->url = config('holaplex.url');
         $this->projectId = config('holaplex.project_id');
         $this->key = config('holaplex.key');
+        $this->receiverAddress = config('holaplex.receiver_address');
+        $this->collectionId = config('holaplex.collection_id');
     }
 
-    public function CreateCollection()
+    public function mintCollection($data)
     {
-        $graphqlQuery = 'mutation CreateCollection($input: CreateCollectionInput!) {
-            createCollection(input: $input) {
-                collection {
-                    id
-                    creationStatus
-                }
-            }
-        }';
+        $graphqlQuery = 'mutation MintToCollection($input: MintToCollectionInput!) {\n  mintToCollection(input: $input) {\n    collectionMint {\n      id\n      creationStatus\n      compressed\n    }\n  }\n}';
+
 
         $inputVariables = [
             "input" => [
-                "project" => $this->projectId,
-                "blockchain" => "SOLANA",
+                "collection" => $this->collectionId,
+                "recipient" => $this->receiverAddress,
+                "compressed" => true,
                 "creators" => [
                     [
-                        "address" => $this->receiver_address,
+                        "address" => $this->receiverAddress,
                         "share" => 100,
-                        "verified" => false
+                        "verified" => true
                     ]
                 ],
-                "metadataJson" => [
-                    "name" => "Collection name",
-                    "symbol" => "SYMBOL",
-                    "description" => "Collection description",
-                    "image" => "<LINK_TO_IMAGE>",
-                    "attributes" => []
-                ]
+                "metadataJson" => $data
             ]
         ];
-
-        $body = ([
+        $body = [
             'query' => $graphqlQuery,
             'variables' => $inputVariables,
-        ]);
-
-        $response = (new CurlRequest($this->url, $this->key, 'POST', json_encode($body)))->sendRequest();
-        return $response;
-
-    }
-    public function getCollectionStatus()
-    {
-        $graphqlQuery = 'query GetCollectionStatus($project: UUID!, $collection:UUID!) {
-            project(id: $project) {
-                id
-                name
-                collection(id: $collection) {
-                    id
-                    creationStatus
-                }
-            }
-        }';
-
-        $inputVariables = [
-            "project" => "<PROJECT_ID>",
-            "collection" => "<COLLECTION_ID>"
         ];
 
-        $body = ([
-            'query' => $graphqlQuery,
-            'variables' => $inputVariables,
-        ]);
-
-        $response = (new CurlRequest($this->url, $this->key, 'POST', json_encode($body)))->sendRequest();
-        return $response;
-    }
-
-    public function mintCollection()
-    {
-        $graphqlQuery = 'mutation MintToCollection($input: MintToCollectionInput!) {
-            mintToCollection(input: $input) {
-                collectionMint {
-                    id
-                    creationStatus
-                    compressed
-                }
-            }
-        }';
-
-        $inputVariables = [
-            'input' => [
-            ]
+        $options = [
+            'http' => [
+                'header' => "Authorization: ory_at_X8f5V224hbT3cOvPtxUXdmKbR86FmVrcbcaX9abtjhU.z6UYhd9hwBx7xaf6qs7ZJlDXP6qVsHkF9krTQguuPyU\r\n" .
+                            "Content-Type: application/json\r\n",
+                'method' => 'POST',
+                'content' => json_encode($body),
+            ],
         ];
 
-        $body = ([
-            'query' => $graphqlQuery,
-            'variables' => $inputVariables,
-        ]);
-
-        $response = (new CurlRequest($this->url, $this->key, 'POST', json_encode($body)))->sendRequest();
-        return $response;
+        $context = stream_context_create($options);
+        return $response = file_get_contents('https://api.holaplex.com/graphql', false, $context);
     }
+
 }

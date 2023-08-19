@@ -1,15 +1,10 @@
 <?php
 
-namespace Api\Traits\Curl;
+namespace App\Traits\Curl;
 
 class CurlRequest
 {
-    public function __construct(
-            public string $apiUrl,
-            public string $bearerToken,
-            public string $requestType,
-            public string $fields,
-    ){}
+    public function __construct(public string $apiUrl, public string $bearerToken, public string $requestType, public $fields,){}
 
     public function sendRequest()
     {
@@ -21,18 +16,18 @@ class CurlRequest
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
+            CURLOPT_TIMEOUT => 300,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => $this->requestType,
             CURLOPT_POSTFIELDS => $this->fields,
             CURLOPT_HTTPHEADER => [
                 'Content-Type: application/json',
-                'Authorization: Bearer '.$this->bearerToken,
+                'Authorization: '.$this->bearerToken,
             ],
         ]);
 
         $response = curl_exec($curl);
 
-        return json_decode($response);
+        return ($response);
     }
 }

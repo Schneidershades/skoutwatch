@@ -1,17 +1,20 @@
 <?php
 
-namespace Api\Traits\Web3Mint;
+namespace App\Traits\Web3Mint;
 
-use Api\Traits\Curl\CurlRequest;
+use App\Traits\Curl\CurlRequest;
 
 class Helius
 {
-    public function __construct(private $url, private $projectId, private $key, private $receiver_address)
+    protected $url;
+    protected $key;
+    protected $receiverAddress;
+
+    public function __construct()
     {
-        $this->receiver_address = config('helius.receiver_address');
-        $this->url = config('helius.url');
-        $this->projectId = config('helius.project_id');
-        $this->key = config('helius.key');
+        $this->url = config('holaplex.url');
+        $this->key = config('holaplex.key');
+        $this->receiverAddress = config('holaplex.receiver_address');
     }
 
     public function getAssets($mintId)
@@ -23,7 +26,7 @@ class Helius
             'id' => $mintId,
             'method' => 'getAsset',
             'params' => [
-                'id' => $this->receiver_address
+                'id' => $this->receiverAddress
             ]
         ];
 
