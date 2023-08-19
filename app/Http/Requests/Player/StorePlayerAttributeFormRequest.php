@@ -98,7 +98,7 @@ class StorePlayerAttributeFormRequest extends FormRequest
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'nin' => 'required|integer',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255',
             'attributes' => 'required|array',
             'attributes.attribute.*' => 'required|string',
             'attributes.score.*' => 'required|integer',

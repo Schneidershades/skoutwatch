@@ -64,15 +64,40 @@ class User extends Authenticatable
         return $this->belongsToMany(Attribute::class, 'player_attributes');
     }
 
-
     public function playerMints()
     {
         return $this->hasMany(PlayerMint::class, 'user_id');
     }
-
-    public function catAtt()
+    public function playerAttributePace()
     {
-        return $this->hasManyThrough(Attribute::class, );
+        return $this->hasMany(PlayerAttribute::class, 'user_id')
+                    ->where('attribute_category_id', AttributeCategory::where('name', 'Pace')->first()->id)
+                    ->avg('score');
+    }
+
+    public function playerAttributeShooting()
+    {
+        return $this->hasMany(PlayerAttribute::class, 'user_id')->where('attribute_category_id', AttributeCategory::where('name', 'Shooting')->first()->id)->avg('score');
+    }
+
+    public function playerAttributePassing()
+    {
+        return $this->hasMany(PlayerAttribute::class, 'user_id')->where('attribute_category_id', AttributeCategory::where('name', 'Passing')->first()->id)->avg('score');
+    }
+
+    public function playerAttributeDribbling()
+    {
+        return $this->hasMany(PlayerAttribute::class, 'user_id')->where('attribute_category_id', AttributeCategory::where('name', 'Dribbling')->first()->id)->avg('score');
+    }
+
+    public function playerAttributeDefending()
+    {
+        return $this->hasMany(PlayerAttribute::class, 'user_id')->where('attribute_category_id', AttributeCategory::where('name', 'Defending')->first()->id)->avg('score');
+    }
+
+    public function playerAttributePhysicality()
+    {
+        return $this->hasMany(PlayerAttribute::class, 'user_id')->where('attribute_category_id', AttributeCategory::where('name', 'Physicality')->first()->id)->avg('score');
     }
 
 }

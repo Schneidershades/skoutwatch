@@ -29,4 +29,9 @@ class AttributeCategory extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function playerAttributeCategories()
+    {
+        return $this->hasMany(PlayerAttribute::class, 'attribute_category_id');
+    }
 }

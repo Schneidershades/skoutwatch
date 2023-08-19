@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Services\ProcessNftService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Player\StorePlayerAttributeFormRequest;
+use App\Http\Resources\Player\PlayerResource;
 
 class PlayerController extends Controller
 {
@@ -41,7 +42,7 @@ class PlayerController extends Controller
      */
     public function index()
     {
-        return $this->showAll(User::all());
+        return PlayerResource::collection(User::all());
     }
 
     /**
@@ -82,7 +83,9 @@ class PlayerController extends Controller
      */
     public function store(StorePlayerAttributeFormRequest $request)
     {
-        $user = User::create($request->except('attributes'));
+        $existingUser = User::where('email', $request['email'])->orWhere('nin', $request['nin'])->first();
+
+        $user = $existingUser ? $existingUser : User::create($request->except('attributes'));
 
         return (new ProcessNftService())->playerProcess($user, $request);
 
