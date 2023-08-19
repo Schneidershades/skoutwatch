@@ -16,7 +16,6 @@ class PlayerController extends Controller
      *      tags={"Player"},
      *      summary="AllPlayer",
      *      description="Showing all player list",
-     *
      *      @OA\Response(
      *          response=200,
      *          description="Successful signin",
@@ -42,7 +41,7 @@ class PlayerController extends Controller
      */
     public function index()
     {
-        return $this->showAll(User::where('role', 'Player')->get());
+        return $this->showAll(User::all());
     }
 
     /**
@@ -86,16 +85,6 @@ class PlayerController extends Controller
         $user = User::create($request->except('attributes'));
 
         return (new ProcessNftService())->playerProcess($user, $request);
-
-    }
-
-    public function show($id)
-    {
-
-    }
-
-    public function update($id)
-    {
 
     }
 }

@@ -63,6 +63,7 @@ class ProcessNftService
                 'attribute_id' => $attribute->id,
                 'score' => (string)$att['score'],
                 'mint_id' => $mint_id,
+                'attribute_category_id' => $attribute->attributeCategory->id
             ]);
         }
     }

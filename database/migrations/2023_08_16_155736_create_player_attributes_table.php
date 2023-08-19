@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('player_attributes', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('attribute_id')->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
+            $table->uuid('attribute_category_id')->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
             $table->string('score')->nullable();
             $table->string('mint_id')->nullable();
             $table->uuid('user_id')->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();

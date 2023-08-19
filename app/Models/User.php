@@ -70,4 +70,9 @@ class User extends Authenticatable
         return $this->hasMany(PlayerMint::class, 'user_id');
     }
 
+    public function catAtt()
+    {
+        return $this->hasManyThrough(Attribute::class, );
+    }
+
 }
