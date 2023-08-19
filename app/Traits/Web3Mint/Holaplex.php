@@ -2,11 +2,7 @@
 
 namespace App\Traits\Web3Mint;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Request;
 use App\Traits\Curl\CurlRequest;
-use Softonic\GraphQL\ClientBuilder;
-use Illuminate\Support\Facades\Http;
 
 class Holaplex
 {
