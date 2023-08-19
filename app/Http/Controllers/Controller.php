@@ -25,6 +25,10 @@ use Illuminate\Routing\Controller as BaseController;
  *     url="http://skoutwatchapi.test",
  *     description="Local API server"
  * )
+ * @OA\Server(
+ *     url="http://skoutwatch-dev-api.eu-west-3.elasticbeanstalk.com",
+ *     description="Local API server"
+ * )
  * * @OA\Server(
  *     url="https://dev-api.skoutwatch.com",
  *     description="Staging API server"
