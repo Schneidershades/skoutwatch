@@ -24,7 +24,7 @@ Route::prefix('v1')->group(function () {
         Route::post('change/password', 'ChangePasswordController@store');
     });
 
-    Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'Api\Attribute'], function () {
+    Route::group(['namespace' => 'Api\Attribute'], function () {
         Route::resource('attributes', 'AttributeController');
         Route::resource('attribute-category', 'AttributeCategoryController');
     });
