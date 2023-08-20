@@ -29,7 +29,7 @@ Route::prefix('v1')->group(function () {
         Route::resource('attribute-category', 'AttributeCategoryController');
     });
 
-    Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'Api\player'], function () {
+    Route::group(['namespace' => 'Api\player'], function () {
         Route::resource('players', 'PlayerController');
     });
 });
