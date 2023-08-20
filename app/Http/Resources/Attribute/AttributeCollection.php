@@ -16,4 +16,20 @@ class AttributeCollection extends ResourceCollection
     {
         return parent::toArray($request);
     }
+
+    public static function originalAttribute($index)
+    {
+        $attribute = [
+        ];
+
+        return isset($attribute[$index]) ? $attribute[$index] : null;
+    }
+
+    public static function transformedAttribute($index)
+    {
+        $attribute = [
+        ];
+
+        return isset($attribute[$index]) ? $attribute[$index] : null;
+    }
 }
