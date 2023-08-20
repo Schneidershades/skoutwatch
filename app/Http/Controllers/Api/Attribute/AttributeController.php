@@ -36,7 +36,6 @@ class AttributeController extends Controller
      *          response=403,
      *          description="Forbidden"
      *      ),
-     *      security={ {"bearerAuth": {}} },
      * )
      */
 
