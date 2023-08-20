@@ -57,7 +57,7 @@ class UserController extends Controller
 
         // event(new UserRegistered($user));
 
-        (new SolanaWalletService($user))->createUserWallet();
+        // (new SolanaWalletService($user))->createUserWallet();
 
         return $this->respondWithToken($user->createToken('MyApp')->plainTextToken);
     }
