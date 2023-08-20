@@ -12,11 +12,21 @@ class PlayerController extends Controller
 {
     /**
      * @OA\Get(
-     *      path="/api/v1/players",
+     *      path="/api/v1/players?per_page={per_page}",
      *      operationId="AllPlayer",
      *      tags={"Player"},
      *      summary="AllPlayer",
      *      description="Showing all player list",
+     *      @OA\Parameter(
+     *          name="per_page",
+     *          description="per_page",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string",
+     *              example="5"
+     *          )
+     *      ),
      *      @OA\Response(
      *          response=200,
      *          description="Successful signin",
