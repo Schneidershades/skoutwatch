@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Api\Player;
 
 use App\Models\User;
+use App\Traits\Web3Mint\Helius;
 use App\Services\ProcessNftService;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Player\StorePlayerAttributeFormRequest;
 use App\Http\Resources\Player\PlayerResource;
+use App\Http\Requests\Player\StorePlayerAttributeFormRequest;
 
 class PlayerController extends Controller
 {
@@ -98,4 +99,49 @@ class PlayerController extends Controller
         return (new ProcessNftService())->playerProcess($user, $request);
 
     }
+
+     /**
+     * @OA\Get(
+     *      path="/api/v1/player/{id}",
+     *      operationId="showPlayer",
+     *      tags={"Player"},
+     *      summary="Show Player",
+     *      description="Show Player",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Player id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful signin",
+     *          @OA\MediaType(
+     *             mediaType="application/json",
+     *         ),
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      security={ {"bearerAuth": {}} },
+     * )
+     */
+    public function show($id)
+    {
+        // (new Helius())->getAssets($mintId);
+    }
+
+
 }

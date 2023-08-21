@@ -14,6 +14,10 @@
             "description": "Local API server"
         },
         {
+            "url": "http://skoutwatch-dev-api.eu-west-3.elasticbeanstalk.com",
+            "description": "Local API server"
+        },
+        {
             "url": "https://dev-api.skoutwatch.com",
             "description": "Staging API server"
         },
@@ -27,6 +31,45 @@
         }
     ],
     "paths": {
+        "/api/v1/assets?per_page={per_page}": {
+            "get": {
+                "tags": [
+                    "Assets"
+                ],
+                "summary": "AllAssets",
+                "description": "Showing all Assets list",
+                "operationId": "AllAssets",
+                "parameters": [
+                    {
+                        "name": "per_page",
+                        "in": "path",
+                        "description": "per_page",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "5"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful signin",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
         "/api/v1/attribute-category": {
             "get": {
                 "tags": [
@@ -51,12 +94,7 @@
                     "403": {
                         "description": "Forbidden"
                     }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
+                }
             }
         },
         "/api/v1/attributes": {
@@ -83,12 +121,7 @@
                     "403": {
                         "description": "Forbidden"
                     }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
+                }
             }
         },
         "/api/v1/user/change/password": {
@@ -797,7 +830,7 @@
                 ]
             }
         },
-        "/api/v1/players": {
+        "/api/v1/players?per_page={per_page}": {
             "get": {
                 "tags": [
                     "Player"
@@ -805,6 +838,18 @@
                 "summary": "AllPlayer",
                 "description": "Showing all player list",
                 "operationId": "AllPlayer",
+                "parameters": [
+                    {
+                        "name": "per_page",
+                        "in": "path",
+                        "description": "per_page",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "5"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful signin",
@@ -821,13 +866,10 @@
                     "403": {
                         "description": "Forbidden"
                     }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            },
+                }
+            }
+        },
+        "/api/v1/players": {
             "post": {
                 "tags": [
                     "Player"
@@ -857,6 +899,44 @@
                     },
                     "401": {
                         "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/api/v1/player/{id}": {
+            "get": {
+                "tags": [
+                    "Player"
+                ],
+                "summary": "Show Player",
+                "description": "Show Player",
+                "operationId": "showPlayer",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Player id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful signin",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "unauthenticated"
                     },
                     "403": {
                         "description": "Forbidden"

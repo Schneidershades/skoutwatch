@@ -70,4 +70,61 @@ class Holaplex
 
     }
 
+    public function getCollectionMintStatus()
+    {
+        $graphqlQuery = 'query GetCollectionMintStatus($project: UUID!, $collection: UUID!) {
+            project(id: $project) {
+              id
+              name
+              collection(id: $collection) {
+                id
+                creationStatus
+                mints {
+                  id
+                  creationStatus
+                }
+              }
+            }
+          }';
+
+        $inputVariables = [
+            "collection" => $this->collectionId,
+            "project" => $this->projectId,
+        ];
+
+        $body = [
+            'query' => $graphqlQuery,
+            'variables' => $inputVariables,
+        ];
+
+        return (new CurlRequest($this->url, $this->key, 'POST', json_encode($body)))->sendRequest();
+
+    }
+
+    public function RetryMintToCollection($mintId)
+    {
+        $graphqlQuery = 'mutation RetryMintToCollection($input: RetryMintEditionInput!) {
+            retryMintToCollection(input: $input) {
+              collectionMint {
+                id
+                creationStatus
+                compressed
+              }
+            }
+          }';
+
+        $inputVariables = [
+            "id" => $mintId,
+        ];
+
+        $body = [
+            'query' => $graphqlQuery,
+            'variables' => $inputVariables,
+        ];
+
+        return (new CurlRequest($this->url, $this->key, 'POST', json_encode($body)))->sendRequest();
+    }
+
 }
+
+

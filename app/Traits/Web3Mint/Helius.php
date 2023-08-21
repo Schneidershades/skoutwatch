@@ -12,25 +12,25 @@ class Helius
 
     public function __construct()
     {
-        $this->url = config('holaplex.url');
-        $this->key = config('holaplex.key');
-        $this->receiverAddress = config('holaplex.receiver_address');
+        $this->url = config('helius.mainnet_url');
+        $this->key = config('helius.key');
+        $this->receiverAddress = config('helius.receiver_address');
     }
 
     public function getAssets($mintId)
     {
-        $url = "{$this->url}/?api-key={$this->key}";
+        $url = "https://api.mainnet-beta.solana.com";
 
         $body = [
             'jsonrpc' => '2.0',
-            'id' => $mintId,
+            'id' => 'FZoDJXPLUA6cHi4So8i2MRkULcrSHbeieuCAvhUrsj8g',
             'method' => 'getAsset',
             'params' => [
-                'id' => $this->receiverAddress
+                'id' => $mintId
             ]
         ];
 
-        $response = (new CurlRequest($this->url, $this->key, 'POST', json_encode($body)))->sendRequest();
+        $response = (new CurlRequest($url, $this->key, 'POST', json_encode($body)))->sendRequest();
         return $response;
     }
 }
