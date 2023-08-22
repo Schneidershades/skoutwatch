@@ -16,7 +16,7 @@ class AttributeResource extends JsonResource
     {
         return [
             'attribute' => $this->name,
-            'score' => 70
+            'score' => rand(65,94)
         ];
     }
 }
