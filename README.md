@@ -2,6 +2,12 @@
 
 [![Watch Demo](https://img.youtube.com/vi/jbtoL-w824M/0.jpg)](https://www.youtube.com/watch?v=jbtoL-w824M)
 
+
+
+[Watch Skoutwatch Video Demo](https://www.youtube.com/watch?v=jbtoL-w824M)
+
+
+
 # SkoutWatch: Unleash the Athlete Discovery Revolution
 
 SkoutWatch is a Laravel-based platform that aims to revolutionize the athlete discovery market through transparency, advanced scouting, and innovative data insights.
