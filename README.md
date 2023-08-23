@@ -1,8 +1,6 @@
+# SkoutWatch: Demo Video
+
 [![Watch Demo](https://img.youtube.com/vi/jbtoL-w824M/0.jpg)](https://www.youtube.com/watch?v=jbtoL-w824M)
-
-## Description
-
-TalentScout is an API built on the Laravel framework that aims to provide transparency and efficiency in athlete scouting and discovery. Our platform empowers scouts, bettors, retailers, and developers with reliable data and insights for informed decision-making.
 
 # SkoutWatch: Unleash the Athlete Discovery Revolution
 
@@ -10,7 +8,7 @@ SkoutWatch is a Laravel-based platform that aims to revolutionize the athlete di
 
 ## Description
 
-SkoutWatch is a web application built on the Laravel framework that aims to provide transparency and efficiency in athlete scouting and discovery. Our platform empowers scouts, bettors, retailers, and developers with reliable data and insights for informed decision-making.
+SkoutWatch is API / Web Application built on the Laravel framework that aims to provide transparency and efficiency in athlete scouting and discovery. Our platform empowers scouts, bettors, retailers, and developers with reliable data and insights for informed decision-making.
 
 ## Problem and Opportunity
 
